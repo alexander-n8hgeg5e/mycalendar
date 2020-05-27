@@ -1,0 +1,47 @@
+#!/bin/fish
+set commitsuccess 0
+set commitexitcode -1
+set pulled 0
+set pushed 0
+set DIR "$HOME"/PIM
+and cd $DIR
+and git add -A .
+and echo (git commit -m... ;and set commitexitcode 0)|grep "nichts zu committen, Arbeitsverzeichnis unverändert" > /dev/null
+and set commitsuccess 1
+
+
+if not test (cat /etc/hostname) = tmrl; or not test -f /etc/hostname
+  git pull tmrl master > /dev/null
+  and set pulled 1
+  git push tmrl master > /dev/null ^ /dev/null
+  and set pushed 1
+else
+  echo nopush,nopull
+  and set pushed 3
+  and set pulled 3
+end
+    
+
+if test $commitsuccess -eq 1; or test $commitexitcode -eq 0
+	echo commit success
+else
+	echo commit failed
+end
+if test $pulled -eq 1
+	echo pull success
+else if test $pushed -eq 3
+	echo nopull
+else
+	echo pull failed
+end
+if test $pushed -eq 1
+	echo push success
+else if test $pushed -eq 3
+	echo nopush
+else
+	echo push failed
+end
+test $commitsuccess -eq 1; or test $commitexitcode -eq 0
+and test $pulled -eq 1
+and test $pushed -eq 1
+and exit 0
