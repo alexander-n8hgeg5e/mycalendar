@@ -870,3 +870,4 @@ hi def link CalWeeknm   Comment
 hi def link CalToday    Directory
 hi def link CalHeader   Special
 hi def link CalMemo     Identifier
+" vim: set shiftwidth=2 foldnestmax=20 :
