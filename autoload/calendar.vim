@@ -83,7 +83,7 @@ function! calendar#action(...)
 
   if b:CalendarDir
     let dir = 'H'
-let cnr = col('.') - (col('.')%(24+5)) + 1
+    let cnr = col('.') - (col('.')%(24+5)) + 1
     let week = ((col(".") - cnr - 1 + cnr/49) / 3)
   else
     let dir = 'V'
