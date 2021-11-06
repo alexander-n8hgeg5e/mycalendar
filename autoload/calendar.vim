@@ -117,7 +117,7 @@ function! calendar#action(...)
   endif
 
   " extract day
-  let day = matchstr(expand("<cword>"), '[^0].*')
+  let day = matchstr(expand("<cword>"), '\v[1-9]+')
   if day == 0
     return
   endif
